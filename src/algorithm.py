@@ -1,3 +1,3 @@
 """
-Module with the implementation of blotto game theory.
+Module with the implementation of Blotto Game theory.
 """
