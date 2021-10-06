@@ -7,6 +7,7 @@ Docs: https://doc.qt.io/qtforpython/,
 
 import sys
 
+from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (QWidget, QLineEdit,
                              QApplication, QPushButton, QLabel)
@@ -39,26 +40,31 @@ class UserWindow(QWidget):
 
         position1 = QLineEdit(self)
         position1.setFont(QFont('Arial', 25))
+        position1.setAlignment(Qt.AlignCenter)
         position1.move(left_border, top_border)
         position1.resize(position_width, position_height)
 
         position2 = QLineEdit(self)
         position2.setFont(QFont('Arial', 25))
+        position2.setAlignment(Qt.AlignCenter)
         position2.move(left_border + position_width, top_border)
         position2.resize(position_width, position_height)
 
         position3 = QLineEdit(self)
         position3.setFont(QFont('Arial', 25))
+        position3.setAlignment(Qt.AlignCenter)
         position3.move(left_border + position_width * 2, top_border)
         position3.resize(position_width, position_height)
 
         position4 = QLineEdit(self)
         position4.setFont(QFont('Arial', 25))
+        position4.setAlignment(Qt.AlignCenter)
         position4.move(left_border + position_width * 3, top_border)
         position4.resize(position_width, position_height)
 
         position5 = QLineEdit(self)
         position5.setFont(QFont('Arial', 25))
+        position5.setAlignment(Qt.AlignCenter)
         position5.move(left_border + position_width * 4, top_border)
         position5.resize(position_width, position_height)
 
@@ -68,7 +74,7 @@ class UserWindow(QWidget):
         button.move(190, 250)
         button.resize(200, 32)
 
-        self.setGeometry(600, 300, 600, 300)
+        self.setGeometry(500, 300, 600, 300)
         self.setWindowTitle('Blotto Game')
         self.show()
 
