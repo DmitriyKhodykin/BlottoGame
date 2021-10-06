@@ -7,57 +7,63 @@ Docs: https://doc.qt.io/qtforpython/,
 
 import sys
 
-from PyQt5.QtGui import QTextTableFormat
-from PyQt5.QtWidgets import (QWidget, QLineEdit, QInputDialog,
-                             QApplication, QLabel, QPushButton, QDockWidget, QListWidget)
-from PyQt5.uic.properties import QtWidgets, QtGui
+from PyQt5.QtGui import QFont
+from PyQt5.QtWidgets import (QWidget, QLineEdit,
+                             QApplication, QPushButton, QLabel)
 
 
 class UserWindow(QWidget):
 
     def __init__(self):
         super().__init__()
-
         self.init_gui()
 
     def init_gui(self):
 
         left_border = 45
-        top_border = 120
+        top_border = 130
         position_width = 100
         position_height = 100
 
-        rule_table = QTextTableFormat()
+        # Game rules
+        rules = "Rules. You have 100 resource units. " \
+                "Distribute resources by " \
+                "position in such a way that you are quantitatively " \
+                "superior to your opponent in as many positions as possible."
 
-        # rules = QListWidget(self)
-        # rules.addItems("""
-        # You have 100 resource units. Distribute resources by
-        # position in such a way that you are quantitatively
-        # superior to your opponent in as many positions as possible.
-        # """)
-        # rules.move(15, 5)
+        textbox = QLabel(rules, self)
+        textbox.setWordWrap(True)
+        textbox.setFont(QFont('Arial', 11))
+        textbox.move(left_border, 10)
+        textbox.resize(500, 100)
 
         position1 = QLineEdit(self)
+        position1.setFont(QFont('Arial', 25))
         position1.move(left_border, top_border)
         position1.resize(position_width, position_height)
 
         position2 = QLineEdit(self)
+        position2.setFont(QFont('Arial', 25))
         position2.move(left_border + position_width, top_border)
         position2.resize(position_width, position_height)
 
         position3 = QLineEdit(self)
+        position3.setFont(QFont('Arial', 25))
         position3.move(left_border + position_width * 2, top_border)
         position3.resize(position_width, position_height)
 
         position4 = QLineEdit(self)
+        position4.setFont(QFont('Arial', 25))
         position4.move(left_border + position_width * 3, top_border)
         position4.resize(position_width, position_height)
 
         position5 = QLineEdit(self)
+        position5.setFont(QFont('Arial', 25))
         position5.move(left_border + position_width * 4, top_border)
         position5.resize(position_width, position_height)
 
         button = QPushButton('Make a guess', self)
+        button.setFont(QFont('Arial', 11))
         button.clicked.connect(self.click_method)
         button.move(190, 250)
         button.resize(200, 32)
