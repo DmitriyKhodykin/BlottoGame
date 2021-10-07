@@ -5,8 +5,6 @@ Docs: https://doc.qt.io/qtforpython/,
       https://doc.qt.io/qt-5/qtexamplesandtutorials.html
 """
 
-import sys
-
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (QWidget, QLineEdit,
@@ -79,10 +77,10 @@ class UserWindow(QWidget):
         self.show()
 
     def click_method(self):
-        print('Your name: ' + self.line.text())
+        print('Clicked')
 
 
 if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    ex = UserWindow()
-    sys.exit(app.exec_())
+    app = QApplication([])
+    window = UserWindow()
+    app.exec_()
