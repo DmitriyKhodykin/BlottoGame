@@ -24,7 +24,10 @@ class UserWindow(QWidget):
         self.init_gui()
 
     def init_gui(self):
-
+        """
+        Window for entering user suggestion.
+        :return: None
+        """
         left_border = 45
         top_border = 130
         position_width = 100
@@ -42,6 +45,7 @@ class UserWindow(QWidget):
         textbox.move(left_border, 10)
         textbox.resize(500, 100)
 
+        # Positions
         self.position1 = QLineEdit(self)
         self.position1.setFont(QFont('Arial', 25))
         self.position1.setAlignment(Qt.AlignCenter)
@@ -72,18 +76,34 @@ class UserWindow(QWidget):
         self.position5.move(left_border + position_width * 4, top_border)
         self.position5.resize(position_width, position_height)
 
+        # Ok Button
         self.button = QPushButton('Make a guess', self)
         self.button.setFont(QFont('Arial', 11))
         self.button.clicked.connect(self.click_method)
         self.button.move(190, 250)
         self.button.resize(200, 32)
 
+        # Window Geometry
         self.setGeometry(500, 300, 600, 300)
         self.setWindowTitle('Blotto Game')
         self.show()
 
     def click_method(self):
-        print('Position 1 number:', self.position1.text())
+        """
+        How to proceed after clicking.
+        :return:
+        """
+        position_number_1 = int(self.position1.text())
+        position_number_2 = int(self.position2.text())
+        position_number_3 = int(self.position3.text())
+        position_number_4 = int(self.position4.text())
+        position_number_5 = int(self.position5.text())
+        user_guess = [position_number_1,
+                      position_number_2,
+                      position_number_3,
+                      position_number_4,
+                      position_number_5]
+        print(user_guess)
 
 
 if __name__ == '__main__':
