@@ -1,6 +1,7 @@
 """
 Module with the implementation of Blotto Game theory.
 """
+import numpy
 
 
 def blotto_algorithm(user_guess: list):
@@ -9,9 +10,11 @@ def blotto_algorithm(user_guess: list):
     :return: None
     """
     computer = [20, 20, 17, 21, 22]  # AI
+    c1 = numpy.random.normal(20, 5, 5)
+    c1 = numpy.round(c1, 0)
 
     print("human:", user_guess, "SUM:", sum(user_guess))
-    print("computer:", computer, "SUM:", sum(computer))
+    print("computer:", c1, "SUM:", sum(c1))
 
     res = 0
     for i in range(len(user_guess)):
