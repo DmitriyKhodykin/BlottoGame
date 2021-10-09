@@ -34,13 +34,12 @@ class Window(QWidget):
 
     class Position(QLineEdit):
 
-        def __init__(self, left_border=45, top_border=130,
-                     position_width=100, position_height=100):
+        def __init__(self, left_border, top_border):
             super().__init__()
             self.setFont(QFont('Arial', 25))
             self.setAlignment(Qt.AlignCenter)
             self.move(left_border, top_border)
-            self.resize(position_width, position_height)
+            self.resize(100, 100)
 
     def init_gui(self):
         """
