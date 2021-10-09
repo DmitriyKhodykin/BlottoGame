@@ -5,10 +5,10 @@ Module with the implementation of Blotto Game theory.
 import numpy
 
 
-def blotto_algorithm(user_guess: list):
+def blotto_algorithm(user_guess: list) -> [list, str]:
     """
     Compare positions in pairs and calculate the result.
-    :return: None
+    :return: Computer guess, result message
     """
     # Random computer guess
     random_list = numpy.random.randint(0, 100, 5)
