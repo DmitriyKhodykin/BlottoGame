@@ -11,6 +11,152 @@ from PyQt5.QtWidgets import (QWidget, QLineEdit,
                              QApplication, QPushButton, QLabel)
 
 
+class Window(QWidget):
+    """
+    Basic Window class.
+    """
+    def __init__(self):
+        super().__init__()
+        self.textbox = None
+        self.position1 = None
+        self.position2 = None
+        self.position3 = None
+        self.position4 = None
+        self.position5 = None
+        self.position6 = None
+        self.position7 = None
+        self.position8 = None
+        self.position9 = None
+        self.position10 = None
+        self.button = None
+        self.result_message = None
+        self.init_gui()
+
+    class Position(QLineEdit):
+
+        def __init__(self, left_border=45, top_border=130,
+                     position_width=100, position_height=100):
+            super().__init__()
+            self.setFont(QFont('Arial', 25))
+            self.setAlignment(Qt.AlignCenter)
+            self.move(left_border, top_border)
+            self.resize(position_width, position_height)
+
+    def init_gui(self):
+        """
+        Basic Window layout.
+        :return: None
+        """
+        left_border = 45
+        top_border = 130
+        position_width = 100
+        position_height = 100
+
+        # Game rules
+        rules = "Rules. You have 100 resource units. " \
+                "Distribute resources by " \
+                "position in such a way that you are quantitatively " \
+                "superior to your opponent in as many positions as possible."
+
+        self.textbox = QLabel(rules, self)
+        self.textbox.setWordWrap(True)
+        self.textbox.setFont(QFont('Arial', 11))
+        self.textbox.move(left_border, 10)
+        self.textbox.resize(500, 100)
+
+        # Positions
+        # Computer positions
+        self.position1 = QLineEdit(self)
+        self.position1.setFont(QFont('Arial', 25))
+        self.position1.setAlignment(Qt.AlignCenter)
+        self.position1.move(left_border, top_border)
+        self.position1.resize(position_width, position_height)
+
+        self.position2 = QLineEdit(self)
+        self.position2.setFont(QFont('Arial', 25))
+        self.position2.setAlignment(Qt.AlignCenter)
+        self.position2.move(left_border + position_width, top_border)
+        self.position2.resize(position_width, position_height)
+
+        self.position3 = QLineEdit(self)
+        self.position3.setFont(QFont('Arial', 25))
+        self.position3.setAlignment(Qt.AlignCenter)
+        self.position3.move(left_border + position_width * 2, top_border)
+        self.position3.resize(position_width, position_height)
+
+        self.position4 = QLineEdit(self)
+        self.position4.setFont(QFont('Arial', 25))
+        self.position4.setAlignment(Qt.AlignCenter)
+        self.position4.move(left_border + position_width * 3, top_border)
+        self.position4.resize(position_width, position_height)
+
+        self.position5 = QLineEdit(self)
+        self.position5.setFont(QFont('Arial', 25))
+        self.position5.setAlignment(Qt.AlignCenter)
+        self.position5.move(left_border + position_width * 4, top_border)
+        self.position5.resize(position_width, position_height)
+
+        # Human positions
+        self.position6 = QLineEdit(self)
+        self.position6.setFont(QFont('Arial', 25))
+        self.position6.setAlignment(Qt.AlignCenter)
+        self.position6.move(left_border, top_border)
+        self.position6.resize(position_width, position_height)
+
+        self.position7 = QLineEdit(self)
+        self.position7.setFont(QFont('Arial', 25))
+        self.position7.setAlignment(Qt.AlignCenter)
+        self.position7.move(left_border + position_width, top_border)
+        self.position7.resize(position_width, position_height)
+
+        self.position8 = QLineEdit(self)
+        self.position8.setFont(QFont('Arial', 25))
+        self.position8.setAlignment(Qt.AlignCenter)
+        self.position8.move(left_border + position_width * 2, top_border)
+        self.position8.resize(position_width, position_height)
+
+        self.position9 = QLineEdit(self)
+        self.position9.setFont(QFont('Arial', 25))
+        self.position9.setAlignment(Qt.AlignCenter)
+        self.position9.move(left_border + position_width * 3, top_border)
+        self.position9.resize(position_width, position_height)
+
+        self.position10 = QLineEdit(self)
+        self.position10.setFont(QFont('Arial', 25))
+        self.position10.setAlignment(Qt.AlignCenter)
+        self.position10.move(left_border + position_width * 4, top_border)
+        self.position10.resize(position_width, position_height)
+
+        # Ok Button
+        self.button = QPushButton('Make a guess', self)
+        self.button.setFont(QFont('Arial', 11))
+        self.button.clicked.connect(self.click_method)
+        self.button.move(190, 250)
+        self.button.resize(200, 32)
+
+        # Window Geometry
+        self.setGeometry(500, 300, 600, 300)
+        self.setWindowTitle('Blotto Game')
+        self.show()
+
+    def click_method(self):
+        """
+        How to proceed after clicking.
+        :return:
+        """
+        position_number_6 = int(self.position6.text())
+        position_number_7 = int(self.position7.text())
+        position_number_8 = int(self.position8.text())
+        position_number_9 = int(self.position9.text())
+        position_number_10 = int(self.position10.text())
+        user_guess = [position_number_6,
+                      position_number_7,
+                      position_number_8,
+                      position_number_9,
+                      position_number_10]
+        print(user_guess)
+
+
 class UserWindow(QWidget):
 
     def __init__(self):
