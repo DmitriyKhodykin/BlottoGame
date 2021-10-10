@@ -48,6 +48,18 @@ class Window(QWidget):
             self.move(left_border, top_border)
             self.resize(self.position_width, self.position_height)
 
+    class TextBox(QLabel):
+        """
+        Text box with game rules configuration.
+        """
+        def __init__(self, text):
+            super().__init__()
+            self.textbox = QLabel(text, self)
+            self.textbox.setWordWrap(True)
+            self.textbox.setFont(QFont('Arial', 11))
+            self.textbox.move(self.left_border, self.top_border_computer)
+            self.textbox.resize(500, 100)
+
     def init_gui(self):
         """
         Basic Window layout.
@@ -60,11 +72,7 @@ class Window(QWidget):
                 "position in such a way that you are quantitatively " \
                 "superior to your opponent in as many positions as possible."
 
-        self.textbox = QLabel(rules, self)
-        self.textbox.setWordWrap(True)
-        self.textbox.setFont(QFont('Arial', 11))
-        self.textbox.move(self.left_border, 10)
-        self.textbox.resize(500, 100)
+        self.textbox = self.TextBox(rules)
 
         # Positions
         # Computer positions
