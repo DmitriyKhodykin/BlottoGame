@@ -17,23 +17,23 @@ class Window(QWidget):
     """
     def __init__(self):
         super().__init__()
-        self.textbox = None
-        self.position1 = None
+        self.textbox = None  # Textbox with game's rules
+        self.position1 = None  # Number entry positions
         self.position2 = None
         self.position3 = None
         self.position4 = None
         self.position5 = None
-        self.position6 = None
+        self.position6 = None  # Human's positions are 6-10
         self.position7 = None
         self.position8 = None
         self.position9 = None
         self.position10 = None
         self.button = None
         self.result_message = None
-        self.left_border = 45
-        self.top_border_human = 130
-        self.top_border_computer = 10
-        self.position_width = 100
+        self.left_border = 45  # Border for all elements
+        self.top_border_human = 130  # Border for human positions
+        self.top_border_computer = 10  # Border for computer positions
+        self.position_width = 100  # Position's size
         self.position_height = 100
         self.init_gui()
 
@@ -59,6 +59,14 @@ class Window(QWidget):
             self.textbox.setFont(QFont('Arial', 11))
             self.textbox.move(self.left_border, self.top_border_computer)
             self.textbox.resize(500, 100)
+
+    class OkButton(QPushButton):
+        def __init__(self, *args):
+            super(QPushButton).__init__(*args)
+            self.button.setFont(QFont('Arial', 11))
+            self.button.clicked.connect(self.click_method)
+            self.button.move(190, 250)
+            self.button.resize(200, 32)
 
     def init_gui(self):
         """
@@ -90,11 +98,7 @@ class Window(QWidget):
         self.position5 = self.Position(self.left_border + self.position_width * 4, self.top_border_human)
 
         # Ok Button
-        self.button = QPushButton('Make a guess', self)
-        self.button.setFont(QFont('Arial', 11))
-        self.button.clicked.connect(self.click_method)
-        self.button.move(190, 250)
-        self.button.resize(200, 32)
+        self.button = self.OkButton('Make a guess', self)
 
         # Window Geometry
         self.setGeometry(500, 300, 600, 300)
