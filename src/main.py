@@ -3,8 +3,12 @@ Main module.
 """
 
 from PyQt5.QtWidgets import QApplication
-from src.gui import UserWindow
+from src.gui import UserWindow, Window
+
+# app = QApplication([])
+# window = UserWindow()
+# app.exec_()
 
 app = QApplication([])
-window = UserWindow()
+window = Window()
 app.exec_()

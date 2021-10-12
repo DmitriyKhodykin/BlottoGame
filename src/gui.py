@@ -52,21 +52,19 @@ class Window(QWidget):
         """
         Text box with game rules configuration.
         """
-        def __init__(self, text):
-            super().__init__()
-            self.textbox = QLabel(text, self)
-            self.textbox.setWordWrap(True)
-            self.textbox.setFont(QFont('Arial', 11))
-            self.textbox.move(self.left_border, self.top_border_computer)
-            self.textbox.resize(500, 100)
+        def __init__(self, *args, **kwargs):
+            super(QLabel).__init__(*args, **kwargs)
+            self.setWordWrap(True)
+            self.setFont(QFont('Arial', 11))
+            self.move(self.left_border, self.top_border_computer)
+            self.resize(500, 100)
 
     class OkButton(QPushButton):
         def __init__(self, *args):
             super(QPushButton).__init__(*args)
-            self.button.setFont(QFont('Arial', 11))
-            self.button.clicked.connect(self.click_method)
-            self.button.move(190, 250)
-            self.button.resize(200, 32)
+            self.setFont(QFont('Arial', 11))
+            self.move(190, 250)
+            self.resize(200, 32)
 
     def init_gui(self):
         """
@@ -99,6 +97,7 @@ class Window(QWidget):
 
         # Ok Button
         self.button = self.OkButton('Make a guess', self)
+        self.button.clicked.connect(self.click_method)
 
         # Window Geometry
         self.setGeometry(500, 300, 600, 300)
