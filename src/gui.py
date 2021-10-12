@@ -78,7 +78,7 @@ class Window(QWidget):
                 "position in such a way that you are quantitatively " \
                 "superior to your opponent in as many positions as possible."
 
-        self.textbox = self.TextBox(rules)
+        self.textbox = self.TextBox(rules, self)
 
         # Positions
         # Computer positions
