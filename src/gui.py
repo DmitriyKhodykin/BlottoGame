@@ -37,35 +37,6 @@ class Window(QWidget):
         self.position_height = 100
         self.init_gui()
 
-    class Position(QLineEdit):
-        """
-        Position configuration.
-        """
-        def __init__(self, left_border, top_border):
-            super().__init__()
-            self.setFont(QFont('Arial', 25))
-            self.setAlignment(Qt.AlignCenter)
-            self.move(left_border, top_border)
-            self.resize(self.position_width, self.position_height)
-
-    class TextBox(QLabel):
-        """
-        Text box with game rules configuration.
-        """
-        def __init__(self, *args, **kwargs):
-            super(QLabel).__init__(*args, **kwargs)
-            self.setWordWrap(True)
-            self.setFont(QFont('Arial', 11))
-            self.move(self.left_border, self.top_border_computer)
-            self.resize(500, 100)
-
-    class OkButton(QPushButton):
-        def __init__(self, *args):
-            super(QPushButton).__init__(*args)
-            self.setFont(QFont('Arial', 11))
-            self.move(190, 250)
-            self.resize(200, 32)
-
     def init_gui(self):
         """
         Basic Window layout.
@@ -120,6 +91,38 @@ class Window(QWidget):
                       position_number_9,
                       position_number_10]
         print(user_guess)
+
+
+class Position(QLineEdit):
+    """
+    Position configuration.
+    """
+    def __init__(self, left_border, top_border):
+        super().__init__()
+        self.setFont(QFont('Arial', 25))
+        self.setAlignment(Qt.AlignCenter)
+        self.move(left_border, top_border)
+        self.resize(self.position_width, self.position_height)
+
+
+class TextBox(QLabel):
+    """
+    Text box with game rules configuration.
+    """
+    def __init__(self, *args, **kwargs):
+        super(QLabel).__init__(*args, **kwargs)
+        self.setWordWrap(True)
+        self.setFont(QFont('Arial', 11))
+        self.move(self.left_border, self.top_border_computer)
+        self.resize(500, 100)
+
+
+class OkButton(QPushButton):
+    def __init__(self, *args):
+        super(QPushButton).__init__(*args)
+        self.setFont(QFont('Arial', 11))
+        self.move(190, 250)
+        self.resize(200, 32)
 
 
 class UserWindow(QWidget):
