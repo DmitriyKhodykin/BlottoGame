@@ -51,18 +51,10 @@ class Window(QWidget):
 
         # Positions
         # Computer positions
-        self.position1 = Position(self.left_border, self.top_border_computer)
-        self.position2 = Position(self.left_border + Position.position_width, self.top_border_computer)
-        self.position3 = Position(self.left_border + Position.position_width * 2, self.top_border_computer)
-        self.position4 = Position(self.left_border + Position.position_width * 3, self.top_border_computer)
-        self.position5 = Position(self.left_border + Position.position_width * 4, self.top_border_computer)
+        self.position2 = Position()
 
         # Human positions
-        self.position1 = Position(self.left_border, self.top_border_human)
-        self.position2 = Position(self.left_border + Position.position_width, self.top_border_human)
-        self.position3 = Position(self.left_border + Position.position_width * 2, self.top_border_human)
-        self.position4 = Position(self.left_border + Position.position_width * 3, self.top_border_human)
-        self.position5 = Position(self.left_border + Position.position_width * 4, self.top_border_human)
+        self.position2 = Position()
 
         # Ok Button
         self.button = OkButton('Make a guess', self)
@@ -98,11 +90,10 @@ class Position(QLineEdit):
     position_width = 100  # Position's size
     position_height = 100
 
-    def __init__(self, left_border, top_border):
+    def __init__(self):
         super().__init__()
         self.setFont(QFont('Arial', 25))
         self.setAlignment(Qt.AlignCenter)
-        self.move(left_border, top_border)
         self.resize(self.position_width, self.position_height)
 
 
@@ -114,13 +105,12 @@ class TextBox(QLabel):
         super().__init__(*args, **kwargs)
         self.setWordWrap(True)
         self.setFont(QFont('Arial', 11))
-        # self.move(self.left_border, self.top_border_computer)
         self.resize(500, 100)
 
 
 class OkButton(QPushButton):
-    def __init__(self, *args):
-        super().__init__(*args)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.setFont(QFont('Arial', 11))
         self.move(190, 250)
         self.resize(200, 32)
