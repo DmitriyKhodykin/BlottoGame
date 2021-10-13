@@ -33,8 +33,6 @@ class Window(QWidget):
         self.left_border = 45  # Border for all elements
         self.top_border_human = 130  # Border for human positions
         self.top_border_computer = 10  # Border for computer positions
-        self.position_width = 100  # Position's size
-        self.position_height = 100
         self.init_gui()
 
     def init_gui(self):
@@ -49,25 +47,25 @@ class Window(QWidget):
                 "position in such a way that you are quantitatively " \
                 "superior to your opponent in as many positions as possible."
 
-        self.textbox = self.TextBox(rules, self)
+        self.textbox = TextBox(rules, self)
 
         # Positions
         # Computer positions
-        self.position1 = self.Position(self.left_border, self.top_border_computer)
-        self.position2 = self.Position(self.left_border + self.position_width, self.top_border_computer)
-        self.position3 = self.Position(self.left_border + self.position_width * 2, self.top_border_computer)
-        self.position4 = self.Position(self.left_border + self.position_width * 3, self.top_border_computer)
-        self.position5 = self.Position(self.left_border + self.position_width * 4, self.top_border_computer)
+        self.position1 = Position(self.left_border, self.top_border_computer)
+        self.position2 = Position(self.left_border + Position.position_width, self.top_border_computer)
+        self.position3 = Position(self.left_border + Position.position_width * 2, self.top_border_computer)
+        self.position4 = Position(self.left_border + Position.position_width * 3, self.top_border_computer)
+        self.position5 = Position(self.left_border + Position.position_width * 4, self.top_border_computer)
 
         # Human positions
-        self.position1 = self.Position(self.left_border, self.top_border_human)
-        self.position2 = self.Position(self.left_border + self.position_width, self.top_border_human)
-        self.position3 = self.Position(self.left_border + self.position_width * 2, self.top_border_human)
-        self.position4 = self.Position(self.left_border + self.position_width * 3, self.top_border_human)
-        self.position5 = self.Position(self.left_border + self.position_width * 4, self.top_border_human)
+        self.position1 = Position(self.left_border, self.top_border_human)
+        self.position2 = Position(self.left_border + Position.position_width, self.top_border_human)
+        self.position3 = Position(self.left_border + Position.position_width * 2, self.top_border_human)
+        self.position4 = Position(self.left_border + Position.position_width * 3, self.top_border_human)
+        self.position5 = Position(self.left_border + Position.position_width * 4, self.top_border_human)
 
         # Ok Button
-        self.button = self.OkButton('Make a guess', self)
+        self.button = OkButton('Make a guess', self)
         self.button.clicked.connect(self.click_method)
 
         # Window Geometry
@@ -97,6 +95,9 @@ class Position(QLineEdit):
     """
     Position configuration.
     """
+    position_width = 100  # Position's size
+    position_height = 100
+
     def __init__(self, left_border, top_border):
         super().__init__()
         self.setFont(QFont('Arial', 25))
@@ -110,16 +111,16 @@ class TextBox(QLabel):
     Text box with game rules configuration.
     """
     def __init__(self, *args, **kwargs):
-        super(QLabel).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
         self.setWordWrap(True)
         self.setFont(QFont('Arial', 11))
-        self.move(self.left_border, self.top_border_computer)
+        # self.move(self.left_border, self.top_border_computer)
         self.resize(500, 100)
 
 
 class OkButton(QPushButton):
     def __init__(self, *args):
-        super(QPushButton).__init__(*args)
+        super().__init__(*args)
         self.setFont(QFont('Arial', 11))
         self.move(190, 250)
         self.resize(200, 32)
