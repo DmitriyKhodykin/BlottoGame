@@ -106,6 +106,7 @@ class Window(QWidget):
         game_result = blotto_algorithm(user_guess)
         computer_guess: list = game_result[0]
         result_message: str = game_result[1]
+        print(computer_guess, user_guess, result_message)
 
 
 class Position(QLineEdit):

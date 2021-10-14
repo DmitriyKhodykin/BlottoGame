@@ -17,8 +17,6 @@ def blotto_algorithm(user_guess: list) -> [list, str]:
         sum_random = sum(random_list)
         random_choice = int(round(i / sum_random * 100, 0))
         computer_guess.append(random_choice)
-    print("human:", user_guess, "SUM:", sum(user_guess))
-    print("computer:", computer_guess, "SUM:", sum(computer_guess))
 
     # Count the result
     result = 0
@@ -31,8 +29,6 @@ def blotto_algorithm(user_guess: list) -> [list, str]:
         elif temp_result > 0:
             result = result - 1
 
-    print("Computer - Human Sum:", result)
-
     # Refereeing
     if result > 0:
         result_message = 'You are lose'
@@ -40,8 +36,6 @@ def blotto_algorithm(user_guess: list) -> [list, str]:
         result_message = 'Draw game'
     else:
         result_message = 'You are win'
-    print(result_message)
-
     return computer_guess, result_message
 
 
