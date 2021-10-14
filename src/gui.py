@@ -50,11 +50,8 @@ class Window(QWidget):
         self.textbox = TextBox(rules, self)
 
         # Positions
-        # Computer positions
-        self.position2 = Position()
-
         # Human positions
-        self.position2 = Position()
+        self.position1 = Position(self)
 
         # Ok Button
         self.button = OkButton('Make a guess', self)
@@ -90,8 +87,8 @@ class Position(QLineEdit):
     position_width = 100  # Position's size
     position_height = 100
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args):
+        super().__init__(*args)
         self.setFont(QFont('Arial', 25))
         self.setAlignment(Qt.AlignCenter)
         self.resize(self.position_width, self.position_height)
