@@ -48,10 +48,26 @@ class Window(QWidget):
                 "superior to your opponent in as many positions as possible."
 
         self.textbox = TextBox(rules, self)
+        self.textbox.move(self.left_border, 10)
 
         # Positions
+        # Computer positions
+
         # Human positions
-        self.position1 = Position(self)
+        self.position6 = Position(self)
+        self.position6.move(self.left_border, self.top_border_human)
+
+        self.position7 = Position(self)
+        self.position7.move(self.left_border + 100, self.top_border_human)
+
+        self.position8 = Position(self)
+        self.position8.move(self.left_border + 200, self.top_border_human)
+
+        self.position9 = Position(self)
+        self.position9.move(self.left_border + 300, self.top_border_human)
+
+        self.position10 = Position(self)
+        self.position10.move(self.left_border + 400, self.top_border_human)
 
         # Ok Button
         self.button = OkButton('Make a guess', self)
