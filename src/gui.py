@@ -8,7 +8,7 @@ Docs: https://doc.qt.io/qtforpython/,
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (QWidget, QLineEdit,
-                             QApplication, QPushButton, QLabel)
+                             QPushButton, QLabel)
 
 
 class Window(QWidget):
@@ -222,9 +222,3 @@ class UserWindow(QWidget):
                       position_number_4,
                       position_number_5]
         print(user_guess)
-
-
-if __name__ == '__main__':
-    app = QApplication([])
-    window = UserWindow()
-    app.exec_()
