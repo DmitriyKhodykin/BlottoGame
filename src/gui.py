@@ -15,26 +15,19 @@ from src.algorithm import blotto_algorithm
 
 class Window(QWidget):
     """
-    Basic Window class.
+    User guess Window.
     """
     def __init__(self):
         super().__init__()
         self.textbox = None  # Textbox with game's rules
-        self.position1 = None  # Number entry positions
-        self.position2 = None
-        self.position3 = None
-        self.position4 = None
-        self.position5 = None
-        self.position6 = None  # Human's positions are 6-10
+        self.position6 = None  # User's positions are 6-10
         self.position7 = None
         self.position8 = None
         self.position9 = None
         self.position10 = None
         self.button = None
-        self.result_message = None
         self.left_border = 45  # Border for all elements
         self.top_border_human = 130  # Border for human positions
-        self.top_border_computer = 10  # Border for computer positions
         self.init_gui()
 
     def init_gui(self):
@@ -51,9 +44,6 @@ class Window(QWidget):
 
         self.textbox = TextBox(rules, self)
         self.textbox.move(self.left_border, 10)
-
-        # Positions
-        # Computer positions
 
         # User positions
         self.position6 = Position(self)
@@ -103,10 +93,37 @@ class Window(QWidget):
         :return: None
         """
         user_guess: list = self.get_user_guess()
+        print(user_guess)
         game_result = blotto_algorithm(user_guess)
         computer_guess: list = game_result[0]
+        print(computer_guess)
         result_message: str = game_result[1]
-        print(computer_guess, user_guess, result_message)
+        print(result_message)
+        result_window = ResultWindow(user_guess, computer_guess, result_message)
+
+
+class ResultWindow(QWidget):
+    """
+    Window with game result.
+    """
+    def __init__(self, user_result_box,
+                 computer_result_box,
+                 result_message_box):
+        super().__init__()
+        self.user_result_box = user_result_box
+        self.computer_result_box = computer_result_box
+        self.result_message_box = result_message_box
+        self.textbox = None
+        self.init_gui()
+
+    def init_gui(self):
+        result = f'Result: {self.result_message_box}'
+        self.textbox = TextBox(result, self)
+
+        # Window Geometry
+        self.setGeometry(500, 300, 600, 300)
+        self.setWindowTitle('Blotto Game Result')
+        self.show()
 
 
 class Position(QLineEdit):
