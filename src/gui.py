@@ -118,17 +118,15 @@ class ResultWindow(QWidget):
 
     def init_gui(self):
 
+        # Lines up widgets horizontally
         horizontal_box = QHBoxLayout(self)
 
-        top_left = QLabel(f'{self.user_result_box}', self)
-        top_left.setFrameShape(QLabel.StyledPanel)
+        # Widgets
+        top_left = ResultTile(f'User Guess: \n {self.user_result_box}', self)
+        top_right = ResultTile(f'Computer Guess: \n {self.computer_result_box}', self)
+        bottom = ResultTile(f'Result: {self.result_message_box}', self)
 
-        top_right = QLabel(f'{self.computer_result_box}', self)
-        top_right.setFrameShape(QLabel.StyledPanel)
-
-        bottom = QLabel(f'{self.result_message_box}', self)
-        bottom.setFrameShape(QLabel.StyledPanel)
-
+        # Divide the window into three parts
         splitter1 = QSplitter(Qt.Horizontal)
         splitter1.addWidget(top_left)
         splitter1.addWidget(top_right)
@@ -140,6 +138,7 @@ class ResultWindow(QWidget):
         horizontal_box.addWidget(splitter2)
         self.setLayout(horizontal_box)
 
+        # Window size and borders
         self.setGeometry(550, 350, 600, 300)
         self.setWindowTitle('Blotto Game Result')
         self.show()
@@ -168,6 +167,18 @@ class TextBox(QLabel):
         self.setWordWrap(True)
         self.setFont(QFont('Arial', 11))
         self.resize(500, 100)
+
+
+class ResultTile(QLabel):
+    """
+    Text box with game result.
+    """
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setWordWrap(True)
+        self.setFrameShape(QLabel.StyledPanel)
+        self.setFont(QFont('Arial', 20))
+        self.setAlignment(Qt.AlignCenter)
 
 
 class OkButton(QPushButton):
