@@ -121,6 +121,7 @@ class ResultWindow(QWidget):
                  f'Computer guess:  {self.computer_guess} \n' \
                  f'User guess: {self.user_guess}'
         self.textbox = TextBox(result, self)
+        self.textbox.move(10, 10)
 
         # Window Geometry
         self.setGeometry(550, 350, 600, 300)
