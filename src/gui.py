@@ -7,7 +7,8 @@ Docs: https://doc.qt.io/qtforpython/
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (QWidget, QLineEdit,
-                             QPushButton, QLabel)
+                             QPushButton, QLabel,
+                             QSplitter, QHBoxLayout)
 
 from src.algorithm import blotto_algorithm
 
@@ -110,20 +111,35 @@ class ResultWindow(QWidget):
                  computer_result_box,
                  result_message_box):
         super().__init__()
-        self.user_guess = user_result_box
-        self.computer_guess = computer_result_box
+        self.user_result_box = user_result_box
+        self.computer_result_box = computer_result_box
         self.result_message_box = result_message_box
-        self.textbox = None
         self.init_gui()
 
     def init_gui(self):
-        result = f'Result: {self.result_message_box} \n' \
-                 f'Computer guess:  {self.computer_guess} \n' \
-                 f'User guess: {self.user_guess}'
-        self.textbox = TextBox(result, self)
-        self.textbox.move(10, 10)
 
-        # Window Geometry
+        horizontal_box = QHBoxLayout(self)
+
+        top_left = QLabel(f'{self.user_result_box}', self)
+        top_left.setFrameShape(QLabel.StyledPanel)
+
+        top_right = QLabel(f'{self.computer_result_box}', self)
+        top_right.setFrameShape(QLabel.StyledPanel)
+
+        bottom = QLabel(f'{self.result_message_box}', self)
+        bottom.setFrameShape(QLabel.StyledPanel)
+
+        splitter1 = QSplitter(Qt.Horizontal)
+        splitter1.addWidget(top_left)
+        splitter1.addWidget(top_right)
+
+        splitter2 = QSplitter(Qt.Vertical)
+        splitter2.addWidget(splitter1)
+        splitter2.addWidget(bottom)
+
+        horizontal_box.addWidget(splitter2)
+        self.setLayout(horizontal_box)
+
         self.setGeometry(550, 350, 600, 300)
         self.setWindowTitle('Blotto Game Result')
         self.show()
