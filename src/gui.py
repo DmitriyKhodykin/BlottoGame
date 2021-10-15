@@ -28,6 +28,7 @@ class Window(QWidget):
         self.button = None
         self.left_border = 45  # Border for all elements
         self.top_border_human = 130  # Border for human positions
+        self.result_window = None
         self.init_gui()
 
     def init_gui(self):
@@ -92,14 +93,14 @@ class Window(QWidget):
         How to proceed after clicking.
         :return: None
         """
-        user_guess: list = self.get_user_guess()
-        print(user_guess)
-        game_result = blotto_algorithm(user_guess)
-        computer_guess: list = game_result[0]
-        print(computer_guess)
-        result_message: str = game_result[1]
-        print(result_message)
-        result_window = ResultWindow(user_guess, computer_guess, result_message)
+        user_guess: list = self.get_user_guess()    # Like [20, 20, 20, 20, 20]
+        game_result = blotto_algorithm(user_guess)  # Calculate the result
+        computer_guess: list = game_result[0]       # Like [20, 20, 20, 20, 20]
+        result_message: str = game_result[1]        # Like "You are win"
+
+        # Activate the Window with game result
+        self.result_window = ResultWindow(user_guess, computer_guess, result_message)
+        self.result_window.show()
 
 
 class ResultWindow(QWidget):
