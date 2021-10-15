@@ -1,1 +1,1 @@
-GNU GPL v3 License
+GNU General Public License v3.0
