@@ -1,3 +1,2 @@
 numpy==1.20.3
-pymemcache==3.5.0
 PyQt5
