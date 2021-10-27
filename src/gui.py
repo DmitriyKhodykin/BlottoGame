@@ -107,6 +107,9 @@ class ResultWindow(QWidget):
     """
     Window with game result.
     """
+    user_score = 0
+    computer_score = 0
+
     def __init__(self, user_result_box,
                  computer_result_box,
                  result_message_box):
@@ -125,8 +128,10 @@ class ResultWindow(QWidget):
         top_left = ResultTile(f'User Guess: \n {self.user_result_box}', self)
         top_right = ResultTile(f'Computer Guess: \n {self.computer_result_box}', self)
         bottom = ResultTile(f'Result: {self.result_message_box}', self)
+        basement_user_score = ResultTile(f'User: {self.user_score}', self)
+        basement_computer_score = ResultTile(f'Computer: {self.computer_score}', self)
 
-        # Divide the window into three parts
+        # Divide the window into parts
         splitter1 = QSplitter(Qt.Horizontal)
         splitter1.addWidget(top_left)
         splitter1.addWidget(top_right)
@@ -134,6 +139,8 @@ class ResultWindow(QWidget):
         splitter2 = QSplitter(Qt.Vertical)
         splitter2.addWidget(splitter1)
         splitter2.addWidget(bottom)
+        splitter2.addWidget(basement_user_score)
+        splitter2.addWidget(basement_computer_score)
 
         horizontal_box.addWidget(splitter2)
         self.setLayout(horizontal_box)
