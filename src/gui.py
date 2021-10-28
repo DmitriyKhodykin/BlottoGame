@@ -17,6 +17,9 @@ class UserWindow(QWidget):
     """
     User's Resource value input window.
     """
+    user_score = 0
+    computer_score = 0
+
     def __init__(self):
         super().__init__()
         self.textbox = None  # Textbox with game's rules
@@ -98,8 +101,14 @@ class UserWindow(QWidget):
         computer_guess: list = game_result[0]       # Like [20, 20, 20, 20, 20]
         result_message: str = game_result[1]        # Like "You are win"
 
+        if result_message == 'You are win':
+            self.user_score = self.user_score + 1
+        elif result_message == 'You are lose':
+            self.computer_score = self.computer_score + 1
+
         # Activate the Window with game result
-        self.result_window = ResultWindow(user_guess, computer_guess, result_message)
+        self.result_window = ResultWindow(user_guess, computer_guess, result_message,
+                                          self.user_score, self.computer_score)
         self.result_window.show()
 
 
@@ -107,16 +116,17 @@ class ResultWindow(QWidget):
     """
     Window with game result.
     """
-    user_score = 0
-    computer_score = 0
-
     def __init__(self, user_result_box,
                  computer_result_box,
-                 result_message_box):
+                 result_message_box,
+                 user_score,
+                 computer_score):
         super().__init__()
         self.user_result_box = user_result_box
         self.computer_result_box = computer_result_box
         self.result_message_box = result_message_box
+        self.user_score = user_score
+        self.computer_score = computer_score
         self.init_gui()
 
     def init_gui(self):
