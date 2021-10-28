@@ -15,6 +15,7 @@ def blotto_algorithm(user_guess: list) -> [list, str]:
     computer_guess = []
     for i in random_list:
         sum_random = sum(random_list)
+        # TODO: Make the correct distribution
         random_choice = int(round(i / sum_random * 100, 0))
         computer_guess.append(random_choice)
 

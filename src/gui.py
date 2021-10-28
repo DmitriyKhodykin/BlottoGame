@@ -50,6 +50,7 @@ class UserWindow(QWidget):
         self.textbox.move(self.left_border, 10)
 
         # User positions
+        # TODO: Make automatic layout
         self.position_one = Position(self)
         self.position_one.move(self.left_border, self.top_border_human)
 
@@ -135,6 +136,8 @@ class ResultWindow(QWidget):
         horizontal_box = QHBoxLayout(self)
 
         # Widgets
+        # TODO: Add 10 windows to compare results element by element
+        #   winning windows must have a green fill
         top_left = ResultTile(f'User Guess: \n {self.user_result_box}', self)
         top_right = ResultTile(f'Computer Guess: \n {self.computer_result_box}', self)
         bottom = ResultTile(f'Result: {self.result_message_box}', self)
