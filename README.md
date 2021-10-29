@@ -1,6 +1,6 @@
 # Colonel Blotto Game
 
-![UserWindow](pic/UserWindow.png)
+![UserWindow](pic/UserWindow2.png)
 
 A Colonel Blotto game is a type of two-person constant-sum 
 game in which the players (officers) are tasked to 
