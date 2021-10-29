@@ -70,8 +70,9 @@ class UserWindow(QWidget):
         vertical_layouts = QVBoxLayout(self)
         vertical_layouts.setSpacing(10)
         horizontal_layouts_rules = QHBoxLayout(self)
-        horizontal_layouts_buttons = QHBoxLayout(self)
         horizontal_layouts_positions = QHBoxLayout(self)
+        horizontal_layouts_positions.setContentsMargins(0, 0, 0, 120)
+        horizontal_layouts_buttons = QHBoxLayout(self)
 
         # The first row - game rules
         horizontal_layouts_rules.addWidget(self.textbox)
