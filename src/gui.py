@@ -2,13 +2,15 @@
 Game user interface.
 
 Docs: https://doc.qt.io/qtforpython/
+      https://ravesli.com/urok-8-upravlenie-komponovkoj-vidzhetov-v-qt5/
 """
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
 from PyQt5.QtWidgets import (QWidget, QLineEdit,
                              QPushButton, QLabel,
-                             QSplitter, QHBoxLayout)
+                             QSplitter, QHBoxLayout,
+                             QVBoxLayout)
 
 from src.algorithm import blotto_algorithm
 
@@ -28,7 +30,8 @@ class UserWindow(QWidget):
         self.position_three = None
         self.position_four = None
         self.position_five = None
-        self.button = None
+        self.guess_button = None
+        self.clear_button = None
         self.left_border = 45  # Border for all elements
         self.top_border_human = 130  # Border for human positions
         self.result_window = None
@@ -47,28 +50,50 @@ class UserWindow(QWidget):
                 "superior to your opponent in as many positions as possible."
 
         self.textbox = TextBox(rules, self)
-        self.textbox.move(self.left_border, 10)
 
         # User positions
-        # TODO: Make automatic layout
         self.position_one = Position(self)
-        self.position_one.move(self.left_border, self.top_border_human)
-
         self.position_two = Position(self)
-        self.position_two.move(self.left_border + 100, self.top_border_human)
-
         self.position_three = Position(self)
-        self.position_three.move(self.left_border + 200, self.top_border_human)
-
         self.position_four = Position(self)
-        self.position_four.move(self.left_border + 300, self.top_border_human)
-
         self.position_five = Position(self)
-        self.position_five.move(self.left_border + 400, self.top_border_human)
 
-        # Ok Button
-        self.button = OkButton('Make a guess', self)
-        self.button.clicked.connect(self.click_method)
+        # BUTTONS:
+        # Main button for user guess
+        self.guess_button = OkButton('Make a guess', self)
+        self.guess_button.clicked.connect(self.click_method)
+
+        # Button to clear user input
+        self.clear_button = OkButton('Clear', self)
+
+        # Window layouts
+        vertical_layouts = QVBoxLayout(self)
+        vertical_layouts.setSpacing(10)
+        horizontal_layouts_rules = QHBoxLayout(self)
+        horizontal_layouts_buttons = QHBoxLayout(self)
+        horizontal_layouts_positions = QHBoxLayout(self)
+
+        # The first row - game rules
+        horizontal_layouts_rules.addWidget(self.textbox)
+
+        # The second row - user positions
+        horizontal_layouts_positions.addWidget(self.position_one)
+        horizontal_layouts_positions.addWidget(self.position_two)
+        horizontal_layouts_positions.addWidget(self.position_three)
+        horizontal_layouts_positions.addWidget(self.position_four)
+        horizontal_layouts_positions.addWidget(self.position_five)
+
+        # The third row - buttons
+        horizontal_layouts_buttons.addWidget(self.guess_button)
+        horizontal_layouts_buttons.addWidget(self.clear_button)
+
+        # Put the horizontal layouts in the vertical layouts
+        vertical_layouts.addStretch(1)
+        vertical_layouts.addLayout(horizontal_layouts_rules)
+        vertical_layouts.addLayout(horizontal_layouts_positions)
+        vertical_layouts.addLayout(horizontal_layouts_buttons)
+
+        self.setLayout(vertical_layouts)
 
         # Window Geometry
         self.setGeometry(500, 300, 600, 300)
@@ -168,14 +193,10 @@ class Position(QLineEdit):
     """
     Position configuration.
     """
-    position_width = 100  # Position's size
-    position_height = 100
-
     def __init__(self, *args):
         super().__init__(*args)
         self.setFont(QFont('Arial', 25))
         self.setAlignment(Qt.AlignCenter)
-        self.resize(self.position_width, self.position_height)
 
 
 class TextBox(QLabel):
@@ -185,8 +206,7 @@ class TextBox(QLabel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setWordWrap(True)
-        self.setFont(QFont('Arial', 11))
-        self.resize(500, 100)
+        self.setFont(QFont('Arial', 12))
 
 
 class ResultTile(QLabel):
@@ -205,5 +225,3 @@ class OkButton(QPushButton):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setFont(QFont('Arial', 11))
-        self.move(190, 250)
-        self.resize(200, 32)
