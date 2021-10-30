@@ -7,10 +7,8 @@ Docs: https://doc.qt.io/qtforpython/
 
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QFont
-from PyQt5.QtWidgets import (QWidget, QLineEdit,
-                             QPushButton, QLabel,
-                             QSplitter, QHBoxLayout,
-                             QVBoxLayout)
+from PyQt5.QtWidgets import (QWidget, QLineEdit, QPushButton,
+                             QLabel, QHBoxLayout, QVBoxLayout)
 
 from src.algorithm import blotto_algorithm
 
@@ -71,7 +69,7 @@ class UserWindow(QWidget):
         vertical_layouts.setSpacing(10)
         horizontal_layouts_rules = QHBoxLayout(self)
         horizontal_layouts_positions = QHBoxLayout(self)
-        horizontal_layouts_positions.setContentsMargins(0, 0, 0, 120)
+        horizontal_layouts_positions.setContentsMargins(0, 0, 0, 110)
         horizontal_layouts_buttons = QHBoxLayout(self)
 
         # The first row - game rules
@@ -157,32 +155,44 @@ class ResultWindow(QWidget):
         self.init_gui()
 
     def init_gui(self):
-
-        # Lines up widgets horizontally
-        horizontal_box = QHBoxLayout(self)
+        """
+        Widgets window and their layouts.
+        :return: Window
+        """
 
         # Widgets
         # TODO: Add 10 windows to compare results element by element
         #   winning windows must have a green fill
-        top_left = ResultTile(f'User Guess: \n {self.user_result_box}', self)
-        top_right = ResultTile(f'Computer Guess: \n {self.computer_result_box}', self)
-        bottom = ResultTile(f'Result: {self.result_message_box}', self)
-        basement_user_score = ResultTile(f'User: {self.user_score}', self)
-        basement_computer_score = ResultTile(f'Computer: {self.computer_score}', self)
+        user_guess = ResultTile(f'User Guess: \n {self.user_result_box}', self)
+        computer_result = ResultTile(f'Computer Guess: \n {self.computer_result_box}', self)
+        result_message = ResultTile(f'Result: {self.result_message_box}', self)
+        user_score = ResultTile(f'User: {self.user_score}', self)
+        computer_score = ResultTile(f'Computer: {self.computer_score}', self)
 
-        # Divide the window into parts
-        splitter1 = QSplitter(Qt.Horizontal)
-        splitter1.addWidget(top_left)
-        splitter1.addWidget(top_right)
+        # Set widgets layouts
+        vertical_layouts = QVBoxLayout(self)
+        horizontal_layouts_guess = QHBoxLayout(self)
+        horizontal_layouts_result = QHBoxLayout(self)
+        horizontal_layouts_score = QHBoxLayout(self)
 
-        splitter2 = QSplitter(Qt.Vertical)
-        splitter2.addWidget(splitter1)
-        splitter2.addWidget(bottom)
-        splitter2.addWidget(basement_user_score)
-        splitter2.addWidget(basement_computer_score)
+        # The first row - user and computer guesses
+        horizontal_layouts_guess.addWidget(user_guess)
+        horizontal_layouts_guess.addWidget(computer_result)
 
-        horizontal_box.addWidget(splitter2)
-        self.setLayout(horizontal_box)
+        # The second row - result message
+        horizontal_layouts_result.addWidget(result_message)
+
+        # The third row - game score
+        horizontal_layouts_score.addWidget(user_score)
+        horizontal_layouts_score.addWidget(computer_score)
+
+        # Put the horizontal layouts in the vertical layouts
+        vertical_layouts.addStretch(1)
+        vertical_layouts.addLayout(horizontal_layouts_guess)
+        vertical_layouts.addLayout(horizontal_layouts_result)
+        vertical_layouts.addLayout(horizontal_layouts_score)
+
+        self.setLayout(vertical_layouts)
 
         # Window size and borders
         self.setGeometry(550, 350, 600, 300)
@@ -196,7 +206,7 @@ class Position(QLineEdit):
     """
     def __init__(self, *args):
         super().__init__(*args)
-        self.setFont(QFont('Arial', 25))
+        self.setFont(QFont('Arial', 30))
         self.setAlignment(Qt.AlignCenter)
 
 
