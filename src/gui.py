@@ -55,7 +55,7 @@ class UserWindow(QWidget):
 
         # Button to clear user input
         self.clear_button = OkButton('Clear', self)
-        # TODO: Make clear func .clicked.connect()
+        self.clear_button.clicked.connect(self.clear_method)
 
         # WINDOW LAYOUTS:
         vertical_layouts = QVBoxLayout(self)
@@ -120,6 +120,12 @@ class UserWindow(QWidget):
         self.result_window = ResultWindow(user_guess, computer_guess, result_message,
                                           self._user_score, self._computer_score)
         self.result_window.show()
+
+    def clear_method(self):
+        for i in range(5):
+            widget_of_grid = self.user_positions_grid.itemAtPosition(0, i)
+            widget = widget_of_grid.widget()
+            widget.clear()
 
 
 class ResultWindow(QWidget):
