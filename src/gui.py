@@ -17,8 +17,8 @@ class UserWindow(QWidget):
     """
     User's Resource value input window.
     """
-    user_score = 0
-    computer_score = 0
+    _user_score = 0
+    _computer_score = 0
 
     def __init__(self):
         super().__init__()
@@ -127,13 +127,13 @@ class UserWindow(QWidget):
         result_message: str = game_result[1]        # Like "You are win"
 
         if result_message == 'You are win':
-            self.user_score = self.user_score + 1
+            self._user_score = self._user_score + 1
         elif result_message == 'You are lose':
-            self.computer_score = self.computer_score + 1
+            self._computer_score = self._computer_score + 1
 
         # Activate the Window with game result
         self.result_window = ResultWindow(user_guess, computer_guess, result_message,
-                                          self.user_score, self.computer_score)
+                                          self._user_score, self._computer_score)
         self.result_window.show()
 
 
@@ -160,35 +160,61 @@ class ResultWindow(QWidget):
         :return: Window
         """
 
-        # Widgets
-        # TODO: Add 10 windows to compare results element by element
-        #   winning windows must have a green fill
-        user_guess = ResultTile(f'User Guess: \n {self.user_result_box}', self)
-        computer_result = ResultTile(f'Computer Guess: \n {self.computer_result_box}', self)
+        # WIDGETS
+        # The first row - computer guess
+        comp_position_0 = ResultTile(str(self.computer_result_box[0]), self)
+        comp_position_1 = ResultTile(str(self.computer_result_box[1]), self)
+        comp_position_2 = ResultTile(str(self.computer_result_box[2]), self)
+        comp_position_3 = ResultTile(str(self.computer_result_box[3]), self)
+        comp_position_4 = ResultTile(str(self.computer_result_box[4]), self)
+
+        # The second row - user guess
+        user_position_0 = ResultTile(str(self.user_result_box[0]), self)
+        user_position_1 = ResultTile(str(self.user_result_box[1]), self)
+        user_position_2 = ResultTile(str(self.user_result_box[2]), self)
+        user_position_3 = ResultTile(str(self.user_result_box[3]), self)
+        user_position_4 = ResultTile(str(self.user_result_box[4]), self)
+
+        # Results
         result_message = ResultTile(f'Result: {self.result_message_box}', self)
         user_score = ResultTile(f'User: {self.user_score}', self)
         computer_score = ResultTile(f'Computer: {self.computer_score}', self)
 
-        # Set widgets layouts
+        # WIDGETS LAYOUTS
         vertical_layouts = QVBoxLayout(self)
-        horizontal_layouts_guess = QHBoxLayout(self)
+        horizontal_layouts_comp_guess = QHBoxLayout(self)
+        horizontal_layouts_user_guess = QHBoxLayout(self)
         horizontal_layouts_result = QHBoxLayout(self)
         horizontal_layouts_score = QHBoxLayout(self)
 
-        # The first row - user and computer guesses
-        horizontal_layouts_guess.addWidget(user_guess)
-        horizontal_layouts_guess.addWidget(computer_result)
+        # Computer positions
+        horizontal_layouts_comp_guess.addWidget(comp_position_0)
+        horizontal_layouts_comp_guess.addWidget(comp_position_1)
+        horizontal_layouts_comp_guess.addWidget(comp_position_2)
+        horizontal_layouts_comp_guess.addWidget(comp_position_3)
+        horizontal_layouts_comp_guess.addWidget(comp_position_4)
 
-        # The second row - result message
+        # User positions
+        horizontal_layouts_user_guess.addWidget(user_position_0)
+        horizontal_layouts_user_guess.addWidget(user_position_1)
+        horizontal_layouts_user_guess.addWidget(user_position_2)
+        horizontal_layouts_user_guess.addWidget(user_position_3)
+        horizontal_layouts_user_guess.addWidget(user_position_4)
+        horizontal_layouts_user_guess.setContentsMargins(0, 0, 0, 50)
+
+        # Result message
         horizontal_layouts_result.addWidget(result_message)
 
-        # The third row - game score
+        # Game score
         horizontal_layouts_score.addWidget(user_score)
         horizontal_layouts_score.addWidget(computer_score)
 
         # Put the horizontal layouts in the vertical layouts
         vertical_layouts.addStretch(1)
-        vertical_layouts.addLayout(horizontal_layouts_guess)
+        vertical_layouts.addWidget(QLabel('Computer:'))
+        vertical_layouts.addLayout(horizontal_layouts_comp_guess)
+        vertical_layouts.addWidget(QLabel('User:'))
+        vertical_layouts.addLayout(horizontal_layouts_user_guess)
         vertical_layouts.addLayout(horizontal_layouts_result)
         vertical_layouts.addLayout(horizontal_layouts_score)
 
