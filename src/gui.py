@@ -31,7 +31,7 @@ class UserWindow(QWidget):
 
     def init_gui(self):
         """
-        Basic Window layout.
+        Resource allocation window.
         :return: None
         """
         # WIDGETS:
@@ -78,10 +78,10 @@ class UserWindow(QWidget):
         vertical_layouts.addLayout(self.user_positions_grid)
         vertical_layouts.addLayout(horizontal_layouts_buttons)
 
-        # Final layout
+        # FINAL LAYOUT
         self.setLayout(vertical_layouts)
 
-        # Window Geometry
+        # WINDOW GEOMETRY:
         self.setGeometry(500, 300, 600, 300)
         self.setWindowTitle('Blotto Game')
         self.show()
@@ -122,6 +122,10 @@ class UserWindow(QWidget):
         self.result_window.show()
 
     def clear_method(self):
+        """
+        Clear data from user positions.
+        :return: None
+        """
         for i in range(5):
             widget_of_grid = self.user_positions_grid.itemAtPosition(0, i)
             widget = widget_of_grid.widget()
@@ -151,55 +155,39 @@ class ResultWindow(QWidget):
         :return: Window
         """
 
-        # WIDGETS
+        # WIDGETS AND LAYOUTS:
+        # Main vertical layout for align others layouts
+        vertical_layouts = QVBoxLayout(self)
+
         # The first row - computer guess
-        comp_position_0 = ResultTile(str(self.computer_result_box[0]), self)
-        comp_position_1 = ResultTile(str(self.computer_result_box[1]), self)
-        comp_position_2 = ResultTile(str(self.computer_result_box[2]), self)
-        comp_position_3 = ResultTile(str(self.computer_result_box[3]), self)
-        comp_position_4 = ResultTile(str(self.computer_result_box[4]), self)
+        horizontal_layouts_comp_guess = QHBoxLayout(self)
+
+        for i in self.computer_result_box:
+            comp_position = ResultTile(str(i), self)
+            horizontal_layouts_comp_guess.addWidget(comp_position)
 
         # The second row - user guess
-        user_position_0 = ResultTile(str(self.user_result_box[0]), self)
-        user_position_1 = ResultTile(str(self.user_result_box[1]), self)
-        user_position_2 = ResultTile(str(self.user_result_box[2]), self)
-        user_position_3 = ResultTile(str(self.user_result_box[3]), self)
-        user_position_4 = ResultTile(str(self.user_result_box[4]), self)
+        horizontal_layouts_user_guess = QHBoxLayout(self)
 
-        # Results
+        for i in self.user_result_box:
+            user_position = ResultTile(str(i), self)
+            horizontal_layouts_user_guess.addWidget(user_position)
+
+        horizontal_layouts_user_guess.setContentsMargins(0, 0, 0, 50)
+
+        # The third row - results
+        horizontal_layouts_result = QHBoxLayout(self)
+        horizontal_layouts_score = QHBoxLayout(self)
+
         result_message = ResultTile(f'Result: {self.result_message_box}', self)
         user_score = ResultTile(f'User: {self.user_score}', self)
         computer_score = ResultTile(f'Computer: {self.computer_score}', self)
 
-        # WIDGETS LAYOUTS
-        vertical_layouts = QVBoxLayout(self)
-        horizontal_layouts_comp_guess = QHBoxLayout(self)
-        horizontal_layouts_user_guess = QHBoxLayout(self)
-        horizontal_layouts_result = QHBoxLayout(self)
-        horizontal_layouts_score = QHBoxLayout(self)
-
-        # Computer positions
-        horizontal_layouts_comp_guess.addWidget(comp_position_0)
-        horizontal_layouts_comp_guess.addWidget(comp_position_1)
-        horizontal_layouts_comp_guess.addWidget(comp_position_2)
-        horizontal_layouts_comp_guess.addWidget(comp_position_3)
-        horizontal_layouts_comp_guess.addWidget(comp_position_4)
-
-        # User positions
-        horizontal_layouts_user_guess.addWidget(user_position_0)
-        horizontal_layouts_user_guess.addWidget(user_position_1)
-        horizontal_layouts_user_guess.addWidget(user_position_2)
-        horizontal_layouts_user_guess.addWidget(user_position_3)
-        horizontal_layouts_user_guess.addWidget(user_position_4)
-        horizontal_layouts_user_guess.setContentsMargins(0, 0, 0, 50)
-
-        # Result message
         horizontal_layouts_result.addWidget(result_message)
-
-        # Game score
         horizontal_layouts_score.addWidget(user_score)
         horizontal_layouts_score.addWidget(computer_score)
 
+        # FINAL LAYOUT:
         # Put the horizontal layouts in the vertical layouts
         vertical_layouts.addStretch(1)
         vertical_layouts.addWidget(QLabel('Computer:'))
@@ -211,7 +199,7 @@ class ResultWindow(QWidget):
 
         self.setLayout(vertical_layouts)
 
-        # Window size and borders
+        # WINDOW GEOMETRY:
         self.setGeometry(550, 350, 600, 300)
         self.setWindowTitle('Blotto Game Result')
         self.show()
