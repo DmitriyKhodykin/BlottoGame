@@ -173,7 +173,7 @@ class ResultWindow(QWidget):
             user_position = ResultTile(str(i), self)
             horizontal_layouts_user_guess.addWidget(user_position)
 
-        horizontal_layouts_user_guess.setContentsMargins(0, 0, 0, 50)
+        horizontal_layouts_user_guess.setContentsMargins(0, 0, 0, 80)
 
         # The third row - results
         horizontal_layouts_result = QHBoxLayout(self)
@@ -232,7 +232,7 @@ class ResultTile(QLabel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setWordWrap(True)
-        self.setFrameShape(QLabel.StyledPanel)
+        self.setFrameShape(QLabel.Box)
         self.setFont(QFont('Arial', 20))
         self.setAlignment(Qt.AlignCenter)
 
